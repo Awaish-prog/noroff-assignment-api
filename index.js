@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
     require('dotenv').config()
 }
 
-const cors = jsonServer.defaults({ noCors: true })
+
 
 const HTTP_METHOD_GET = 'get'
 
