@@ -14,7 +14,7 @@ const cors = jsonServer.defaults({ noCors: true })
 const HTTP_METHOD_GET = 'get'
 
 server.use(middlewares)
-server.use(cors)
+server.use(cors())
 server.use((request, response, next) => {
 
     if (request.method.toLowerCase() !== HTTP_METHOD_GET) {
