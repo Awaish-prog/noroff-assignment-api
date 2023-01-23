@@ -4,10 +4,12 @@ const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 const {PORT = 3000} = process.env
+const cors = require('cors')
 if (process.env.NODE_ENV !== 'PRODUCTION') {
     require('dotenv').config()
 }
 
+server.use(cors())
 
 const HTTP_METHOD_GET = 'get'
 

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dewald-els/noroff-assignment-api#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "json-server": "^0.16.3"
   }
