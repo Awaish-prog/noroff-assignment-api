@@ -41,9 +41,6 @@ server.use((request, response, next) => {
 
 server.use(router)
 
-const proxy = require('http-proxy-middleware');
-server.use('/api', proxy({ target: 'http://localhost:3000', changeOrigin: true }));
-
   
 
 server.listen(PORT, () => {
