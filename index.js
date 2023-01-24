@@ -15,6 +15,7 @@ const HTTP_METHOD_GET = 'get'
 
 server.use(middlewares)
 server.use(cors());
+
 server.use((request, response, next) => {
 
     if (request.method.toLowerCase() !== HTTP_METHOD_GET) {
@@ -33,7 +34,8 @@ server.use((request, response, next) => {
             return response.status('401').json({error: 'Invalid API Key provided - are not allowed to access this resource'})
         }
     }
-
+    response.header("Access-Control-Allow-Origin", "http://localhost:3000")
+    response.header("Access-Control-Allow-Origin", "*")
     next()
 })
 
