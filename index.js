@@ -3,7 +3,7 @@ const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
-const {PORT = 3000} = process.env
+const {PORT = 4000} = process.env
 const cors = require('cors')
 if (process.env.NODE_ENV !== 'PRODUCTION') {
     require('dotenv').config()
@@ -14,8 +14,12 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 const HTTP_METHOD_GET = 'get'
 
 server.use(middlewares)
-server.use(cors());
-
+server.use(cors({origin:"http://localhost:3000"}));
+server.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 server.use((request, response, next) => {
 
     if (request.method.toLowerCase() !== HTTP_METHOD_GET) {
@@ -34,8 +38,7 @@ server.use((request, response, next) => {
             return response.status('401').json({error: 'Invalid API Key provided - are not allowed to access this resource'})
         }
     }
-    response.header("Access-Control-Allow-Origin", "http://localhost:3000")
-    response.header("Access-Control-Allow-Origin", "*")
+    
     next()
 })
 
