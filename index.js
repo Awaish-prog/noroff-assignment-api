@@ -8,16 +8,11 @@ const cors = require('cors')
 if (process.env.NODE_ENV !== 'PRODUCTION') {
     require('dotenv').config()
 }
-const express = require('express')
-const app = express()
+
 
 
 const HTTP_METHOD_GET = 'get'
 
-server.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", req.headers.origin);
-    next();
-});
 
 server.use(middlewares)
 
@@ -46,6 +41,12 @@ server.use((request, response, next) => {
 
 server.use(router)
 
+server.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
 
 server.listen(PORT, () => {
     console.log('JSON Server is running in port: ' + PORT)
