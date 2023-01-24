@@ -14,6 +14,11 @@ const app = express()
 
 const HTTP_METHOD_GET = 'get'
 
+server.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    next();
+});
+
 server.use(middlewares)
 
 
@@ -40,7 +45,7 @@ server.use((request, response, next) => {
 })
 
 server.use(router)
-app.use(cors())
+
 
 server.listen(PORT, () => {
     console.log('JSON Server is running in port: ' + PORT)
